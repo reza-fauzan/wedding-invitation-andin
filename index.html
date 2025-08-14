@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of Deny & Fanny</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --- 1. PALET WARNA UTAMA & PENGATURAN DASAR --- */
+        :root {
+            /* Palet Warna Pink Rose */
+            --primary-pink: #E7A3B0;
+            --dark-rose: #BF6B7B;
+            --soft-rose: #C78283;
+            --pale-pink-bg: #FDF6F7;
+            --white-text: #FFFFFF;
+            --dark-text: #333333;
+            --soft-dark-text: #555;
+            /* Font */
+            --font-heading: 'Great Vibes', cursive;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--pale-pink-bg);
+            color: var(--dark-text);
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- 2. KOMPONEN UMUM & KELAS BANTU --- */
+        .section {
+            padding: 50px 25px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--soft-rose);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 3. GAYA PER BAGIAN (SECTION) --- */
+
+        /* Cover Page (Halaman Pembuka) */
+        .cover-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url(assets/img/cover.jpg) no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white-text);
+            z-index: 100;
+            padding: 20px;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-content h1 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .cover-content h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .open-button {
+            background-color: var(--primary-pink);
+            color: var(--white-text);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .open-button:hover {
+            transform: scale(1.05);
+            background-color: var(--dark-rose);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: url(assets/img/hero.jpg) no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--white-text);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            font-weight: 400;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Ayat Suci & Countdown */
+        #countdown {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .countdown-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            width: 70px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown-item div {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-rose);
+        }
+
+        .countdown-item span {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* The Couple (Monogram) */
+        .couple-section-monogram {
+            background-color: var(--pale-pink-bg);
+        }
+
+        .monogram-circle {
+            width: 150px;
+            height: 150px;
+            border: 2px solid var(--primary-pink);
+            border-radius: 50%;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--font-heading);
+        }
+
+        .monogram-initials {
+            font-size: 3rem;
+            color: var(--dark-rose);
+        }
+
+        .monogram-ampersand {
+            font-size: 2rem;
+            color: var(--primary-pink);
+            margin: 0 5px;
+        }
+
+        .couple-details {
+            margin-bottom: 25px;
+        }
+
+        .couple-fullname {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--dark-rose);
+            margin-bottom: 5px;
+        }
+
+        .couple-parents {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #8c5d66;
+            margin-bottom: 0;
+        }
+
+        /* Save The Date */
+        .event-details {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .event-card {
+            background-color: var(--pale-pink-bg);
+            border: 1px solid #F5E3E6;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            padding: 30px 25px;
+        }
+
+        .event-card h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--dark-rose);
+        }
+
+        .event-card p {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .event-card p i.fas {
+            color: var(--dark-rose);
+            width: 20px;
+            margin-right: 5px;
+        }
+
+        .map-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: var(--primary-pink);
+            color: var(--white-text);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .map-button:hover {
+            background-color: var(--dark-rose);
+        }
+
+        /* Tanda Kasih (Gift Section) */
+        .gift-section {
+            background-color: #FFF;
+        }
+
+        .gift-intro-text {
+            margin-top: -20px;
+            padding: 0 15px;
+        }
+
+        .gift-container {
+            padding: 0 25px;
+            margin-top: 30px;
+        }
+
+        .account-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background-color: #F7F7F7;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .bank-logo {
+            flex-shrink: 0;
+            width: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bank-logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .account-details {
+            flex-grow: 1;
+            text-align: left;
+            min-width: 0;
+        }
+
+        .account-number-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            flex-wrap: wrap;
+            gap: 5px 10px;
+        }
+
+        .account-number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            word-break: break-all;
+        }
+
+        .account-name {
+            font-size: 0.9rem;
+            color: var(--soft-dark-text);
+            margin-top: 4px;
+            margin-bottom: 0;
+            word-break: break-word;
+        }
+
+        .copy-button {
+            background-color: var(--primary-pink);
+            color: var(--white-text);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            flex-shrink: 0;
+        }
+
+        .copy-button:hover {
+            background-color: var(--dark-rose);
+        }
+
+        .physical-gift-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 10px;
+        }
+
+        .decorative-image {
+            width: 40px;
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        .physical-gift-details {
+            text-align: center;
+        }
+
+        .physical-gift-details .address {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 25px;
+            text-align: center;
+            background-color: var(--dark-rose);
+            color: #fcefee;
+        }
+
+        footer .section-title {
+            color: var(--white-text);
+        }
+
+        footer p {
+            color: #fcefee;
+        }
+
+        /* Tombol Kontrol Musik */
+        #music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-pink);
+            color: var(--white-text);
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .2)
+        }
+    </style>
+</head>
+
+<body>
+    <audio id="background-music" loop>
+        <source src="assets/music/janjisuci.m4a" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <button id="music-control" class="hidden">
+        <i id="music-icon" class="fas fa-play"></i>
+    </button>
+
+    <div id="cover-page" class="cover-page">
+        <div class="cover-content">
+            <p>WEDDING INVITATION</p>
+            <h1>Deny & Fanny</h1>
+            <h3>Sabtu, 13 September 2025</h3>
+            <br>
+            <button id="open-invitation" class="open-button">
+                <i class="fas fa-envelope-open-text"></i> Buka Undangan
+            </button>
+        </div>
+    </div>
+
+    <div id="main-content" class="container hidden">
+        <header class="hero section">
+            <h1>Deny & Fanny</h1>
+            <p>We're Getting Married</p>
+            <p>13 . 09 . 2025</p>
+        </header>
+
+        <section class="section">
+            <p><em>"Taruhlah aku seperti meterai pada hatimu, seperti meterai pada lenganmu, karena cinta kuat seperti maut, kegairahan gigih seperti dunia orang mati, nyalanya adalah nyala api, seperti nyala api TUHAN! Air yang banyak tak mampu memadamkan cinta, dan banjir tak dapat menghanyutkannya"</em><br>(Kidung Agung 8:6-7)</p>
+            <div id="countdown">
+                <div class="countdown-item">
+                    <div id="days">00</div><span>Hari</span>
+                </div>
+                <div class="countdown-item">
+                    <div id="hours">00</div><span>Jam</span>
+                </div>
+                <div class="countdown-item">
+                    <div id="minutes">00</div><span>Menit</span>
+                </div>
+                <div class="countdown-item">
+                    <div id="seconds">00</div><span>Detik</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section couple-section-monogram">
+            <div class="monogram-circle">
+                <span class="monogram-initials">D</span>
+                <span class="monogram-ampersand">&</span>
+                <span class="monogram-initials">F</span>
+            </div>
+            <div class="couple-details">
+                <h3 class="couple-fullname">Andreas Deny Tukan</h3>
+                <p class="couple-parents">Putra kedua dari Bapak Mathias Megon Tukan & Ibu Renceuli Gultom</p>
+            </div>
+            <div class="couple-details">
+                <h3 class="couple-fullname">Fanny Setia Anjani</h3>
+                <p class="couple-parents">Putri ketiga dari Bapak Bambang Heryanto & Ibu Elly Berliana Baiin</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Our Story</h2>
+            <p>Berawal dari sebuah pertemuan sederhana yang tak disengaja, benih-benih cinta mulai tumbuh. Melewati berbagai cerita dan momen, kami menyadari bahwa kebersamaan adalah hal yang kami inginkan selamanya. Kini, kami siap melangkah ke jenjang yang baru untuk membangun masa depan bersama.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Save The Date</h2>
+            <div class="event-details">
+                <div class="event-card">
+                    <h3>Pemberkatan Nikah</h3>
+                    <p><i class="fas fa-calendar-alt"></i> Sabtu, 13 September 2025</p>
+                    <p><i class="fas fa-clock"></i> 08:00 - 10:00 WIB</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Gereja Kalvari - Jl. Masjid Al Umar No.1B, Lubang Buaya,
+                        Cipayung, Jakarta Timur</p>
+                    <a href="https://maps.app.goo.gl/9ZfLhZzB8yYy6JvG7" target="_blank" class="map-button">Lihat di
+                        Google Maps</a>
+                </div>
+                <div class="event-card">
+                    <h3>Resepsi</h3>
+                    <p><i class="fas fa-calendar-alt"></i> Sabtu, 13 September 2025</p>
+                    <p><i class="fas fa-clock"></i> 12:00 - 14:00 WIB</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Gedung Pertemuan Graha Sativa - Komplek BULOG 1,
+                        Jatimelati, Pondok Melati, Bekasi</p>
+                    <a href="https://maps.app.goo.gl/NqoJg7K2jZJ9fHk39" target="_blank" class="map-button">Lihat di
+                        Google Maps</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section gift-section">
+            <h2 class="section-title">Tanda Kasih</h2>
+            <p class="gift-intro-text">
+                Terima kasih telah menambah semangat kegembiraan pernikahan kami dengan kehadiran dan hadiah indah Anda.
+            </p>
+            <div class="gift-container">
+                <div class="account-card">
+                    <div class="bank-logo">
+                        <img src="assets/img/logo-bca.png" alt="Logo BCA">
+                    </div>
+                    <div class="account-details">
+                        <div class="account-number-wrapper">
+                            <span class="account-number">5780665167</span>
+                            <button class="copy-button" data-clipboard-text="5780665167">Salin</button>
+                        </div>
+                        <p class="account-name">BCA : Fanny Setia Anjani</p>
+                    </div>
+                </div>
+                <div class="account-card">
+                    <div class="bank-logo">
+                        <img src="assets/img/logo-panin.png" alt="Logo Panin">
+                    </div>
+                    <div class="account-details">
+                        <div class="account-number-wrapper">
+                            <span class="account-number">1001133707</span>
+                            <button class="copy-button" data-clipboard-text="1001133707">Salin</button>
+                        </div>
+                        <p class="account-name">Panin : Andreas Deny Tukan</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir untuk memberikan doa
+                restu.</p>
+            <h2 class="section-title">Deny & Fanny</h2>
+            <p>&copy; 2025. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Inisialisasi Elemen ---
+            const coverPage = document.getElementById('cover-page');
+            const mainContent = document.getElementById('main-content');
+            const openButton = document.getElementById('open-invitation');
+            const backgroundMusic = document.getElementById('background-music');
+            const musicControl = document.getElementById('music-control');
+            const musicIcon = document.getElementById('music-icon');
+            const sections = document.querySelectorAll('.section');
+
+            // --- Fungsi-fungsi Utama ---
+            function openInvitation() {
+                backgroundMusic.play().catch(error => console.error("Autoplay diblokir oleh browser:", error));
+                coverPage.style.transition = 'opacity 1s ease-out';
+                coverPage.style.opacity = '0';
+
+                setTimeout(() => {
+                    coverPage.style.display = 'none';
+                    mainContent.classList.remove('hidden');
+                    musicControl.classList.remove('hidden');
+                    document.body.style.overflowY = 'auto';
+                }, 1000);
+            }
+
+            function toggleMusic() {
+                if (backgroundMusic.paused) {
+                    backgroundMusic.play();
+                } else {
+                    backgroundMusic.pause();
+                }
+            }
+
+            function updateMusicIcon() {
+                if (backgroundMusic.paused) {
+                    musicIcon.classList.remove('fa-pause');
+                    musicIcon.classList.add('fa-play');
+                } else {
+                    musicIcon.classList.remove('fa-play');
+                    musicIcon.classList.add('fa-pause');
+                }
+            }
+
+            function initCountdown() {
+                const countdownDate = new Date("Sep 13, 2025 08:00:00").getTime();
+                const countdownElements = {
+                    days: document.getElementById("days"),
+                    hours: document.getElementById("hours"),
+                    minutes: document.getElementById("minutes"),
+                    seconds: document.getElementById("seconds")
+                };
+
+                const countdownFunction = setInterval(function () {
+                    const now = new Date().getTime();
+                    const distance = countdownDate - now;
+
+                    if (distance < 0) {
+                        clearInterval(countdownFunction);
+                        document.getElementById("countdown").innerHTML = "The Wedding Day is Here!";
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    countdownElements.days.innerText = String(days).padStart(2, '0');
+                    countdownElements.hours.innerText = String(hours).padStart(2, '0');
+                    countdownElements.minutes.innerText = String(minutes).padStart(2, '0');
+                    countdownElements.seconds.innerText = String(seconds).padStart(2, '0');
+                }, 1000);
+            }
+
+            function initScrollAnimations() {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+                sections.forEach(section => { observer.observe(section); });
+            }
+
+            function initCopyButtons() {
+                document.querySelectorAll('.copy-button').forEach(button => {
+                    const originalText = button.innerText;
+                    button.addEventListener('click', () => {
+                        const textToCopy = button.getAttribute('data-clipboard-text');
+                        navigator.clipboard.writeText(textToCopy).then(() => {
+                            button.innerText = 'Berhasil!';
+                            setTimeout(() => {
+                                button.innerText = originalText;
+                            }, 2000);
+                        }).catch(err => {
+                            console.error('Gagal menyalin teks: ', err);
+                        });
+                    });
+                });
+            }
+
+            // --- Menjalankan Semua Fungsi ---
+            openButton.addEventListener('click', openInvitation);
+            musicControl.addEventListener('click', toggleMusic);
+            backgroundMusic.addEventListener('play', updateMusicIcon);
+            backgroundMusic.addEventListener('pause', updateMusicIcon);
+
+            initCountdown();
+            initScrollAnimations();
+            initCopyButtons();
+        });
+    </script>
+</body>
+
+</html>
