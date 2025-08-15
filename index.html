@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
@@ -354,6 +355,119 @@
             margin-bottom: 0;
         }
 
+        /* GALERI */
+        .gallery-section-polaroid {
+            background-color: var(--pale-pink-bg);
+            padding: 60px 15px 80px 15px;
+            /* Tambah padding bawah */
+            overflow: hidden;
+        }
+
+        .gallery-subtitle {
+            margin-top: -15px;
+            font-size: 1rem;
+            color: var(--soft-dark-text);
+        }
+
+        .polaroid-container {
+            margin: 50px auto;
+            width: 100%;
+            max-width: 480px;
+            /* Lebar kontainer diperbesar */
+            height: 800px;
+            /* Tinggi area sebaran foto diperbesar */
+            position: relative;
+        }
+
+        .polaroid-item {
+            position: absolute;
+            transition: transform 0.4s ease, z-index 0.4s;
+        }
+
+        .polaroid-frame {
+            background-color: #fff;
+            padding: 15px;
+            /* Padding bingkai diperbesar */
+            border-radius: 4px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            /* Bayangan lebih dramatis */
+            width: 220px;
+            /* DIUBAH: Ukuran polaroid diperbesar */
+            position: relative;
+            /* Wajib untuk washi tape */
+        }
+
+        /* === EFEK BARU: WASHI TAPE === */
+        .polaroid-frame::after {
+            content: '';
+            position: absolute;
+            top: -12px;
+            /* Posisi tape di atas bingkai */
+            left: 50%;
+            transform: translateX(-50%) rotate(-4deg);
+            /* Miring agar terlihat natural */
+            width: 100px;
+            height: 25px;
+            background-color: var(--primary-pink);
+            opacity: 0.5;
+            /* Efek semi-transparan seperti selotip */
+        }
+
+        .polaroid-frame img {
+            width: 100%;
+            height: 240px;
+            /* DIUBAH: Tinggi gambar disesuaikan */
+            object-fit: cover;
+            display: block;
+            border: 1px solid #f0f0f0;
+        }
+
+        .polaroid-item:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            /* Efek hover diperhalus */
+            z-index: 10;
+        }
+
+        /* === Posisi & Rotasi Baru untuk Ukuran Lebih Besar === */
+        .item-1 {
+            top: 0%;
+            left: 5%;
+            transform: rotate(-8deg);
+        }
+
+        .item-2 {
+            top: 12%;
+            left: 50%;
+            transform: rotate(5deg);
+            z-index: 2;
+        }
+
+        .item-3 {
+            top: 30%;
+            left: -5%;
+            transform: rotate(10deg);
+        }
+
+        .item-4 {
+            top: 45%;
+            left: 55%;
+            transform: rotate(-12deg);
+            z-index: 3;
+        }
+
+        .item-5 {
+            top: 60%;
+            left: 10%;
+            transform: rotate(4deg);
+        }
+
+        .item-6 {
+            top: 70%;
+            left: 45%;
+            transform: rotate(-5deg);
+            z-index: 4;
+        }
+
         /* Save The Date */
         .save-the-date-v2 {
             background-color: var(--pale-pink-bg);
@@ -366,141 +480,6 @@
             grid-template-columns: 1fr;
             /* Satu kolom di mobile */
             gap: 30px;
-        }
-
-        /* --- GALERI --- */
-        .gallery-section {
-            background-color: #1a1a1a;
-            /* Latar belakang hitam dramatis */
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .gallery-section .section-title {
-            color: var(--white-text);
-        }
-
-        .gallery-subtitle {
-            color: #ccc;
-            margin-top: -15px;
-        }
-
-        .film-strip-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 40px;
-        }
-
-        .film-strip {
-            display: flex;
-            gap: 15px;
-            padding: 20px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            /* Animasi scroll yang halus */
-            -ms-overflow-style: none;
-            /* Sembunyikan scrollbar di IE dan Edge */
-            scrollbar-width: none;
-            /* Sembunyikan scrollbar di Firefox */
-        }
-
-        .film-strip::-webkit-scrollbar {
-            display: none;
-            /* Sembunyikan scrollbar di Chrome, Safari, dan Opera */
-        }
-
-        .film-frame {
-            flex: 0 0 80%;
-            /* Lebar setiap frame foto */
-            max-width: 300px;
-            aspect-ratio: 4 / 3;
-            /* Rasio foto */
-            position: relative;
-            background-color: #000;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .film-frame:hover {
-            transform: scale(1.03);
-        }
-
-        .film-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Lubang-lubang khas strip film */
-        .sprocket-holes {
-            position: absolute;
-            left: 0;
-            right: 0;
-            height: 12px;
-            background: linear-gradient(to right,
-                    #000 5px, transparent 5px, transparent 10px,
-                    #000 10px, #000 15px, transparent 15px, transparent 20px,
-                    #000 20px, #000 25px, transparent 25px, transparent 30px,
-                    #000 30px, #000 35px, transparent 35px, transparent 40px,
-                    #000 40px);
-            background-size: 40px 100%;
-            animation: scroll-sprockets 2s linear infinite;
-        }
-
-        .sprocket-holes.top {
-            top: 0;
-        }
-
-        .sprocket-holes.bottom {
-            bottom: 0;
-        }
-
-        @keyframes scroll-sprockets {
-            from {
-                background-position-x: 0px;
-            }
-
-            to {
-                background-position-x: -40px;
-            }
-        }
-
-        /* Tombol Navigasi Kiri & Kanan */
-        .film-nav-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            background-color: rgba(255, 255, 255, 0.8);
-            color: #000;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: none;
-            /* Sembunyi secara default, tampil via JS */
-        }
-
-        .film-nav-button:hover {
-            background-color: #fff;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        #scroll-left {
-            left: 10px;
-        }
-
-        #scroll-right {
-            right: 10px;
         }
 
         /* Kontainer utama untuk efek 3D */
@@ -899,47 +878,59 @@
             </div>
         </section>
 
-        <section class="section gallery-section">
-            <h2 class="section-title">Our Captured Moments</h2>
+        <section class="section gallery-section-polaroid">
+            <h2 class="section-title">Captured Moments</h2>
             <p class="gallery-subtitle">A glimpse of the journey that led us here.</p>
 
-            <div class="film-strip-container">
-                <button id="scroll-left" class="film-nav-button">&lt;</button>
-
-                <div id="film-strip" class="film-strip">
-                    <div class="film-frame">
-                        <img src="https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg?auto=compress&cs=tinysrgb&w=800"
-                            alt="Foto Kenangan 1">
-                        <div class="sprocket-holes"></div>
-                        <div class="sprocket-holes bottom"></div>
-                    </div>
-                    <div class="film-frame">
-                        <img src="https://images.pexels.com/photos/1045541/pexels-photo-1045541.jpeg?auto=compress&cs=tinysrgb&w=800"
-                            alt="Foto Kenangan 2">
-                        <div class="sprocket-holes"></div>
-                        <div class="sprocket-holes bottom"></div>
-                    </div>
-                    <div class="film-frame">
-                        <img src="https://images.pexels.com/photos/4172773/pexels-photo-4172773.jpeg?auto=compress&cs=tinysrgb&w=800"
-                            alt="Foto Kenangan 3">
-                        <div class="sprocket-holes"></div>
-                        <div class="sprocket-holes bottom"></div>
-                    </div>
-                    <div class="film-frame">
-                        <img src="https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=800"
-                            alt="Foto Kenangan 4">
-                        <div class="sprocket-holes"></div>
-                        <div class="sprocket-holes bottom"></div>
-                    </div>
-                    <div class="film-frame">
-                        <img src="https://images.pexels.com/photos/2873951/pexels-photo-2873951.jpeg?auto=compress&cs=tinysrgb&w=800"
-                            alt="Foto Kenangan 5">
-                        <div class="sprocket-holes"></div>
-                        <div class="sprocket-holes bottom"></div>
+            <div class="polaroid-container">
+                <div class="polaroid-item item-1">
+                    <div class="polaroid-frame">
+                        <img src="https://images.pexels.com/photos/1758144/pexels-photo-1758144.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="Momen Indah 1">
+                        <p class="polaroid-caption">Our First Trip</p>
                     </div>
                 </div>
 
-                <button id="scroll-right" class="film-nav-button">&gt;</button>
+                <div class="polaroid-item item-2">
+                    <div class="polaroid-frame">
+                        <img src="https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="Momen Indah 2">
+                        <p class="polaroid-caption">Graduation Day</p>
+                    </div>
+                </div>
+
+                <div class="polaroid-item item-3">
+                    <div class="polaroid-frame">
+                        <img src="https://images.pexels.com/photos/3290068/pexels-photo-3290068.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="Momen Indah 3">
+                        <p class="polaroid-caption">New Year's Eve</p>
+                    </div>
+                </div>
+
+                <div class="polaroid-item item-4">
+                    <div class="polaroid-frame">
+                        <img src="https://images.pexels.com/photos/3782787/pexels-photo-3782787.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="Momen Indah 4">
+                        <p class="polaroid-caption">Spontaneous Adventures</p>
+                    </div>
+                </div>
+
+                <div class="polaroid-item item-5">
+                    <div class="polaroid-frame">
+                        <img src="https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="Momen Indah 5">
+                        <p class="polaroid-caption">The "Yes" Day!</p>
+                    </div>
+                </div>
+
+                <div class="polaroid-item item-6">
+                    <div class="polaroid-frame">
+                        <img src="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="Momen Indah 6">
+                        <p class="polaroid-caption">Just Us</p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -1131,39 +1122,6 @@
                     });
                 });
             }
-
-            // --- GALERI FILM STRIP ---
-            function initFilmStrip() {
-                const strip = document.getElementById('film-strip');
-                const scrollLeftBtn = document.getElementById('scroll-left');
-                const scrollRightBtn = document.getElementById('scroll-right');
-
-                if (!strip) return;
-
-                function checkScroll() {
-                    // Tampilkan tombol hanya jika galeri bisa di-scroll
-                    const canScroll = strip.scrollWidth > strip.clientWidth;
-                    if (canScroll) {
-                        scrollLeftBtn.style.display = 'block';
-                        scrollRightBtn.style.display = 'block';
-                    }
-                }
-
-                scrollLeftBtn.addEventListener('click', () => {
-                    strip.scrollBy({ left: -300, behavior: 'smooth' });
-                });
-
-                scrollRightBtn.addEventListener('click', () => {
-                    strip.scrollBy({ left: 300, behavior: 'smooth' });
-                });
-
-                // Panggil fungsi saat halaman dimuat
-                checkScroll();
-            }
-
-            // Panggil fungsi ini di dalam DOMContentLoaded
-            initFilmStrip();
-
 
             // --- Menjalankan Semua Fungsi ---
             openButton.addEventListener('click', openInvitation);
