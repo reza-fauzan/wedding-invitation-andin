@@ -356,104 +356,48 @@
         }
 
         /* GALERI */
-        .gallery-section-polaroid {
-            background-color: var(--pale-pink-bg);
-            padding: 60px 15px 80px 15px;
-            /* Tambah padding bawah */
-            overflow: hidden;
-        }
+        .gallery-section-sticky {
+    background-color: #000000; /* Latar belakang hitam pekat untuk efek sinematik */
+    padding: 60px 0 0 0;
+}
 
-        .gallery-subtitle {
-            margin-top: -15px;
-            font-size: 1rem;
-            color: var(--soft-dark-text);
-        }
+.sticky-intro {
+    text-align: center;
+    padding: 0 25px 60px 25px;
+    color: #FFFFFF;
+}
+.sticky-intro .gallery-subtitle {
+    opacity: 0.8;
+}
 
-        .polaroid-container {
-            margin: 50px auto;
-            width: 100%;
-            max-width: 480px;
-            height: 700px;
-            position: relative;
-        }
+/* Kontainer yang akan di-scroll (tingginya menentukan durasi scroll) */
+.sticky-gallery-container {
+    height: 400vh; /* 100vh untuk setiap foto, sesuaikan dengan jumlah foto */
+    position: relative;
+}
 
-        .polaroid-item {
-            position: absolute;
-            transition: transform 0.4s ease, z-index 0.4s;
-        }
+/* Panel yang akan menempel (sticky) */
+.sticky-panel {
+    position: sticky;
+    top: 0;
+    height: 100vh; /* Setiap panel memenuhi layar */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        .polaroid-frame {
-            background-color: #fff;
-            padding: 12px;
-            border-radius: 4px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            width: 180px;
-            position: relative;
-        }
-
-        /* === EFEK BARU: WASHI TAPE === */
-        .polaroid-frame::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-5deg);
-            width: 90px;
-            height: 25px;
-            background-color: var(--primary-pink);
-            opacity: 0.5;
-        }
-
-        .polaroid-frame img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-            border: 1px solid #f0f0f0;
-        }
-
-        .polaroid-item:hover {
-            transform: scale(1.15) rotate(0deg) !important;
-            z-index: 10;
-        }
-        .item-1 {
-            top: 0%;
-            left: 5%;
-            transform: rotate(-8deg);
-        }
-
-        .item-2 {
-            top: 12%;
-            left: 50%;
-            transform: rotate(5deg);
-            z-index: 2;
-        }
-
-        .item-3 {
-            top: 30%;
-            left: -5%;
-            transform: rotate(10deg);
-        }
-
-        .item-4 {
-            top: 45%;
-            left: 55%;
-            transform: rotate(-12deg);
-            z-index: 3;
-        }
-
-        .item-5 {
-            top: 60%;
-            left: 10%;
-            transform: rotate(4deg);
-        }
-
-        .item-6 {
-            top: 70%;
-            left: 45%;
-            transform: rotate(-5deg);
-            z-index: 4;
-        }
+.sticky-panel img {
+    width: auto;
+    height: auto;
+    max-width: 90%;
+    max-height: 85vh; /* Pastikan gambar tidak terlalu tinggi */
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 5px solid white;
+    /* Transisi agar perubahan ukuran mulus */
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
 
         /* Save The Date */
         .save-the-date-v2 {
@@ -859,61 +803,27 @@
             </div>
         </section>
 
-        <section class="section gallery-section-polaroid">
-            <h2 class="section-title">Captured Moments</h2>
-            <p class="gallery-subtitle">A glimpse of the journey that led us here.</p>
+        <section class="section gallery-section-sticky">
+    <div class="sticky-intro">
+        <h2 class="section-title">Our Captured Moments</h2>
+        <p class="gallery-subtitle">A few chapters from our story, leading to forever.</p>
+    </div>
 
-            <div class="polaroid-container">
-                <div class="polaroid-item item-1">
-                    <div class="polaroid-frame">
-                        <img src="https://images.pexels.com/photos/1758144/pexels-photo-1758144.jpeg?auto=compress&cs=tinysrgb&w=600"
-                            alt="Momen Indah 1">
-                        <p class="polaroid-caption">Our First Trip</p>
-                    </div>
-                </div>
-
-                <div class="polaroid-item item-2">
-                    <div class="polaroid-frame">
-                        <img src="https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg?auto=compress&cs=tinysrgb&w=600"
-                            alt="Momen Indah 2">
-                        <p class="polaroid-caption">Graduation Day</p>
-                    </div>
-                </div>
-
-                <div class="polaroid-item item-3">
-                    <div class="polaroid-frame">
-                        <img src="https://images.pexels.com/photos/3290068/pexels-photo-3290068.jpeg?auto=compress&cs=tinysrgb&w=600"
-                            alt="Momen Indah 3">
-                        <p class="polaroid-caption">New Year's Eve</p>
-                    </div>
-                </div>
-
-                <div class="polaroid-item item-4">
-                    <div class="polaroid-frame">
-                        <img src="https://images.pexels.com/photos/3782787/pexels-photo-3782787.jpeg?auto=compress&cs=tinysrgb&w=600"
-                            alt="Momen Indah 4">
-                        <p class="polaroid-caption">Spontaneous Adventures</p>
-                    </div>
-                </div>
-
-                <div class="polaroid-item item-5">
-                    <div class="polaroid-frame">
-                        <img src="https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg?auto=compress&cs=tinysrgb&w=600"
-                            alt="Momen Indah 5">
-                        <p class="polaroid-caption">The "Yes" Day!</p>
-                    </div>
-                </div>
-
-                <div class="polaroid-item item-6">
-                    <div class="polaroid-frame">
-                        <img src="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=600"
-                            alt="Momen Indah 6">
-                        <p class="polaroid-caption">Just Us</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
+    <div class="sticky-gallery-container">
+        <div class="sticky-panel">
+            <img src="https://images.pexels.com/photos/1758144/pexels-photo-1758144.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Momen Indah 1">
+        </div>
+        <div class="sticky-panel">
+            <img src="https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Momen Indah 2">
+        </div>
+        <div class="sticky-panel">
+            <img src="https://images.pexels.com/photos/3290068/pexels-photo-3290068.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Momen Indah 3">
+        </div>
+        <div class="sticky-panel">
+            <img src="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Momen Indah 4">
+        </div>
+    </div>
+</section>
 
         <section class="section save-the-date-v2">
             <h2 class="section-title">Save The Date</h2>
@@ -1075,6 +985,38 @@
                     countdownElements.seconds.innerText = String(seconds).padStart(2, '0');
                 }, 1000);
             }
+
+             function initStickyGallery() {
+                const panels = document.querySelectorAll('.sticky-panel');
+                if (panels.length === 0) return;
+
+                window.addEventListener('scroll', () => {
+                    panels.forEach((panel, i) => {
+                        // Hanya proses panel sebelum panel terakhir
+                        if (i < panels.length - 1) {
+                            const nextPanel = panels[i + 1];
+                            const rect = panel.getBoundingClientRect();
+                            const nextRect = nextPanel.getBoundingClientRect();
+
+                            // Jika panel berikutnya mulai masuk ke layar dari bawah
+                            if (nextRect.top <= window.innerHeight && nextRect.top >= 0) {
+                                // Hitung seberapa jauh panel berikutnya sudah masuk
+                                const progress = (window.innerHeight - nextRect.top) / window.innerHeight;
+                                // Mengecilkan panel saat ini berdasarkan progres panel berikutnya
+                                const scale = 1 - (progress * 0.15); // Mengecil hingga 85%
+                                panel.querySelector('img').style.transform = `scale(${Math.max(0.85, scale)})`;
+                            } else if (nextRect.top < 0) {
+                                // Jika panel berikutnya sudah sepenuhnya menutupi
+                                panel.querySelector('img').style.transform = 'scale(0.85)';
+                            } else {
+                                // Jika panel berikutnya belum masuk
+                                panel.querySelector('img').style.transform = 'scale(1)';
+                            }
+                        }
+                    });
+                });
+            }
+            initStickyGallery(); // Panggil fungsinya
 
             function initScrollAnimations() {
                 const observer = new IntersectionObserver(entries => {
