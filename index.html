@@ -4,12 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wedding of Deny & Fanny</title>
+    <title>The Wedding of Gilang & Andin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;700&display=swap"
@@ -18,6 +21,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
@@ -25,14 +29,14 @@
     <style>
         /* --- 1. PALET WARNA UTAMA & PENGATURAN DASAR --- */
         :root {
-            /* Palet Warna Pink Rose */
-            --primary-pink: #E7A3B0;
-            --dark-rose: #BF6B7B;
-            --soft-rose: #C78283;
-            --pale-pink-bg: #FDF6F7;
+            --primary-brown: #8D6E63;     
+            --dark-brown: #5D4037;        
+            --accent-gold: #C5A66A;        
+            --light-bg: #FDF5E6;           
             --white-text: #FFFFFF;
-            --dark-text: #333333;
-            --soft-dark-text: #555;
+            --dark-text: #3D2B1F;          
+            --soft-dark-text: #6d4c41;
+
             /* Font */
             --font-heading: 'Great Vibes', cursive;
             --font-body: 'Montserrat', sans-serif;
@@ -46,7 +50,7 @@
 
         body {
             font-family: var(--font-body);
-            background-color: var(--pale-pink-bg);
+            background-color: var(--light-bg);
             color: var(--dark-text);
             overflow-x: hidden;
             overflow-y: hidden;
@@ -77,7 +81,7 @@
         .section-title {
             font-family: var(--font-heading);
             font-size: 2.8rem;
-            color: var(--soft-rose);
+            color: var(--accent-gold);
             margin-bottom: 20px;
             font-weight: 400;
         }
@@ -212,7 +216,7 @@
 
         /* Latar belakang lembut untuk section */
         .countdown-section {
-            background-color: var(--pale-pink-bg);
+            background-color: var(--light-bg);
             position: relative;
             /* Wajib untuk hiasan bunga */
             padding-top: 80px;
@@ -310,13 +314,13 @@
 
         /* The Couple (Monogram) */
         .couple-section-monogram {
-            background-color: var(--pale-pink-bg);
+            background-color: var(--light-bg);
         }
 
         .monogram-circle {
             width: 150px;
             height: 150px;
-            border: 2px solid var(--primary-pink);
+            border: 2px solid var(--primary-brown);
             border-radius: 50%;
             margin: 0 auto 30px auto;
             display: flex;
@@ -327,12 +331,12 @@
 
         .monogram-initials {
             font-size: 3rem;
-            color: var(--dark-rose);
+            color: var(--dark-brown);
         }
 
         .monogram-ampersand {
             font-size: 2rem;
-            color: var(--primary-pink);
+            color: var(--primary-brown);
             margin: 0 5px;
         }
 
@@ -344,7 +348,7 @@
             font-family: var(--font-body);
             font-weight: 700;
             font-size: 1.2rem;
-            color: var(--dark-rose);
+            color: var(--dark-brown);
             margin-bottom: 5px;
         }
 
@@ -357,51 +361,56 @@
 
         /* GALERI */
         .gallery-section-sticky {
-    background-color: #000000; /* Latar belakang hitam pekat untuk efek sinematik */
-    padding: 60px 0 0 0;
-}
+            background-color: #000000;
+            /* Latar belakang hitam pekat untuk efek sinematik */
+            padding: 60px 0 0 0;
+        }
 
-.sticky-intro {
-    text-align: center;
-    padding: 0 25px 60px 25px;
-    color: #FFFFFF;
-}
-.sticky-intro .gallery-subtitle {
-    opacity: 0.8;
-}
+        .sticky-intro {
+            text-align: center;
+            padding: 0 25px 60px 25px;
+            color: #FFFFFF;
+        }
 
-/* Kontainer yang akan di-scroll (tingginya menentukan durasi scroll) */
-.sticky-gallery-container {
-    height: 400vh; /* 100vh untuk setiap foto, sesuaikan dengan jumlah foto */
-    position: relative;
-}
+        .sticky-intro .gallery-subtitle {
+            opacity: 0.8;
+        }
 
-/* Panel yang akan menempel (sticky) */
-.sticky-panel {
-    position: sticky;
-    top: 0;
-    height: 100vh; /* Setiap panel memenuhi layar */
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        /* Kontainer yang akan di-scroll (tingginya menentukan durasi scroll) */
+        .sticky-gallery-container {
+            height: 400vh;
+            /* 100vh untuk setiap foto, sesuaikan dengan jumlah foto */
+            position: relative;
+        }
 
-.sticky-panel img {
-    width: auto;
-    height: auto;
-    max-width: 90%;
-    max-height: 85vh; /* Pastikan gambar tidak terlalu tinggi */
-    border-radius: 15px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    border: 5px solid white;
-    /* Transisi agar perubahan ukuran mulus */
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
+        /* Panel yang akan menempel (sticky) */
+        .sticky-panel {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            /* Setiap panel memenuhi layar */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sticky-panel img {
+            width: auto;
+            height: auto;
+            max-width: 90%;
+            max-height: 85vh;
+            /* Pastikan gambar tidak terlalu tinggi */
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 5px solid white;
+            /* Transisi agar perubahan ukuran mulus */
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
 
         /* Save The Date */
         .save-the-date-v2 {
-            background-color: var(--pale-pink-bg);
+            background-color: var(--light-bg);
             padding: 60px 25px;
         }
 
@@ -455,7 +464,7 @@
 
         /* Tampilan kartu bagian DEPAN */
         .flip-card-front {
-            background: linear-gradient(135deg, var(--dark-rose) 0%, var(--primary-pink) 100%);
+            background: linear-gradient(135deg, var(--dark-brown) 0%, var(--primary-brown) 100%);
             color: var(--white-text);
         }
 
@@ -490,7 +499,7 @@
         .card-back-title {
             font-family: var(--font-heading);
             font-size: 2rem;
-            color: var(--dark-rose);
+            color: var(--dark-brown);
             margin-bottom: 20px;
         }
 
@@ -514,7 +523,7 @@
             gap: 8px;
             margin-top: 20px;
             padding: 12px 25px;
-            background-color: var(--primary-pink);
+            background-color: var(--primary-brown);
             color: var(--white-text);
             text-decoration: none;
             border-radius: 25px;
@@ -523,13 +532,13 @@
         }
 
         .flip-card-back .map-button:hover {
-            background-color: var(--dark-rose);
+            background-color: var(--dark-brown);
         }
 
 
         /* Tanda Kasih (Gift Section) */
         .gift-section-cards {
-            background-color: var(--pale-pink-bg);
+            background-color: var(--light-bg);
         }
 
         .gift-cards-container {
@@ -569,7 +578,7 @@
             font-family: "Courier New", Courier, monospace;
             font-size: 1.6rem;
             font-weight: 600;
-            color: var(--dark-rose);
+            color: var(--dark-brown);
             letter-spacing: 2px;
             margin-bottom: 25px;
             text-align: center;
@@ -583,8 +592,8 @@
             gap: 8px;
             width: 100%;
             background-color: transparent;
-            border: 2px solid var(--primary-pink);
-            color: var(--dark-rose);
+            border: 2px solid var(--primary-brown);
+            color: var(--dark-brown);
             font-weight: 600;
             padding: 10px 15px;
             border-radius: 10px;
@@ -593,7 +602,7 @@
         }
 
         .gift-section-cards .copy-button:hover {
-            background-color: var(--primary-pink);
+            background-color: var(--primary-brown);
             color: var(--white-text);
         }
 
@@ -618,7 +627,7 @@
             position: absolute;
             width: 40px;
             height: 40px;
-            border-color: var(--primary-pink);
+            border-color: var(--primary-brown);
             border-style: solid;
             opacity: 0.7;
         }
@@ -668,17 +677,117 @@
         .story-signature {
             font-family: var(--font-heading);
             font-size: 2.2rem;
-            color: var(--dark-rose);
+            color: var(--dark-brown);
             text-align: center;
             margin-top: 30px;
             margin-bottom: 0;
         }
 
+        /* --- [BARU] CSS UNTUK FORM & DAFTAR UCAPAN --- */
+        .guestbook-section {
+            background-color: var(--light-bg);
+            padding: 60px 25px;
+        }
+
+        #guestbook-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        #guestbook-form input,
+        #guestbook-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #F5E3E6;
+            border-radius: 10px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--soft-dark-text);
+        }
+
+        #guestbook-form input:focus,
+        #guestbook-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-brown);
+            box-shadow: 0 0 0 3px rgba(231, 163, 176, 0.3);
+        }
+
+        #guestbook-form button {
+            padding: 12px 25px;
+            background-color: var(--primary-brown);
+            color: var(--white-text);
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        #guestbook-form button:hover {
+            background-color: var(--dark-brown);
+        }
+
+        #guestbook-form button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        #ucapan-list {
+            margin-top: 40px;
+            text-align: left;
+            max-height: 400px; /* Batas tinggi agar tidak terlalu panjang */
+            overflow-y: auto; /* Aktifkan scroll jika kontennya panjang */
+            padding-right: 10px; /* Jarak untuk scrollbar */
+        }
+        
+        .ucapan-item {
+            background-color: #FFFFFF;
+            border-left: 5px solid var(--primary-brown);
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(199, 130, 131, 0.08);
+        }
+
+        .ucapan-item p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .ucapan-item .ucapan-nama {
+            font-weight: 700;
+            color: var(--dark-brown);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .ucapan-item .ucapan-pesan {
+            color: var(--soft-dark-text);
+            font-size: 1rem;
+        }
+        
+        .ucapan-item .ucapan-tanggal {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-top: 10px;
+            display: block;
+            text-align: right;
+        }
+
+
         /* Footer */
         footer {
             padding: 50px 25px;
             text-align: center;
-            background-color: var(--dark-rose);
+            background-color: var(--dark-brown);
             color: #fcefee;
         }
 
@@ -697,7 +806,7 @@
             right: 20px;
             width: 50px;
             height: 50px;
-            background-color: var(--primary-pink);
+            background-color: var(--primary-brown);
             color: var(--white-text);
             border-radius: 50%;
             border: none;
@@ -723,8 +832,9 @@
     <div id="cover-page" class="cover-page">
         <div class="cover-content">
             <p>WEDDING INVITATION</p>
-            <h1>Deny & Fanny</h1>
-            <h3>Sabtu, 13 September 2025</h3>
+            <h1>Gilang & Andin</h1>
+            <h3>Sabtu, 06 September 2025</h3>
+            <h4>Turut Mengundang</h4>
             <br>
             <button id="open-invitation" class="open-button">
                 <i class="fa-regular fa-heart"></i> Buka Undangan
@@ -734,9 +844,9 @@
 
     <div id="main-content" class="container hidden">
         <header class="hero section">
-            <h1>Deny & Fanny</h1>
+            <h1>Gilang & Andin</h1>
             <p>We're Getting Married</p>
-            <p>13 . 09 . 2025</p>
+            <p>06 . 09 . 2025</p>
         </header>
 
         <section class="section countdown-section decorated-section">
@@ -770,17 +880,17 @@
 
         <section class="section couple-section-monogram">
             <div class="monogram-circle">
-                <span class="monogram-initials">D</span>
+                <span class="monogram-initials">G</span>
                 <span class="monogram-ampersand">&</span>
-                <span class="monogram-initials">F</span>
+                <span class="monogram-initials">A</span>
             </div>
             <div class="couple-details">
-                <h3 class="couple-fullname">Andreas Deny Tukan</h3>
-                <p class="couple-parents">Putra kedua dari Bapak Mathias Megon Tukan & Ibu Renceuli Gultom</p>
+                <h3 class="couple-fullname">Gilang Rizky Ramadhan</h3>
+                <p class="couple-parents">Putra Pertama dari Bapak Mursalim & Ibu Yayah Khomsiyah</p>
             </div>
             <div class="couple-details">
-                <h3 class="couple-fullname">Fanny Setia Anjani</h3>
-                <p class="couple-parents">Putri ketiga dari Bapak Bambang Heryanto & Ibu Elly Berliana Baiin</p>
+                <h3 class="couple-fullname">Andini Ruslana</h3>
+                <p class="couple-parents">Putri Keempat Belas dari Bapak (Alm) Iyus Ruslana & Ibu (Alm) Een Runaeni</p>
             </div>
         </section>
 
@@ -796,7 +906,7 @@
                     yang memilih untuk berlabuh dan pulang ke satu sama lain.
                 </blockquote>
 
-                <p class="story-signature">Deny & Fanny</p>
+                <p class="story-signature">Gilang & Andini</p>
 
                 <span class="corner bottom-left"></span>
                 <span class="corner bottom-right"></span>
@@ -804,26 +914,30 @@
         </section>
 
         <section class="section gallery-section-sticky">
-    <div class="sticky-intro">
-        <h2 class="section-title">Our Captured Moments</h2>
-        <p class="gallery-subtitle">A few chapters from our story, leading to forever.</p>
-    </div>
+            <div class="sticky-intro">
+                <h2 class="section-title">Our Captured Moments</h2>
+                <p class="gallery-subtitle">A few chapters from our story, leading to forever.</p>
+            </div>
 
-    <div class="sticky-gallery-container">
-        <div class="sticky-panel">
-            <img src="https://images.pexels.com/photos/1758144/pexels-photo-1758144.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Momen Indah 1">
-        </div>
-        <div class="sticky-panel">
-            <img src="https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Momen Indah 2">
-        </div>
-        <div class="sticky-panel">
-            <img src="https://images.pexels.com/photos/3290068/pexels-photo-3290068.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Momen Indah 3">
-        </div>
-        <div class="sticky-panel">
-            <img src="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Momen Indah 4">
-        </div>
-    </div>
-</section>
+            <div class="sticky-gallery-container">
+                <div class="sticky-panel">
+                    <img src="https://images.pexels.com/photos/1758144/pexels-photo-1758144.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        alt="Momen Indah 1">
+                </div>
+                <div class="sticky-panel">
+                    <img src="https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        alt="Momen Indah 2">
+                </div>
+                <div class="sticky-panel">
+                    <img src="https://images.pexels.com/photos/3290068/pexels-photo-3290068.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        alt="Momen Indah 3">
+                </div>
+                <div class="sticky-panel">
+                    <img src="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        alt="Momen Indah 4">
+                </div>
+            </div>
+        </section>
 
         <section class="section save-the-date-v2">
             <h2 class="section-title">Save The Date</h2>
@@ -833,17 +947,16 @@
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <div class="card-front-icon"><i class="fas fa-church"></i></div>
-                            <h3 class="card-front-title">Pemberkatan Nikah</h3>
+                            <h3 class="card-front-title">Akad Nikah</h3>
                             <p class="card-front-prompt">Sentuh untuk Detail</p>
                         </div>
                         <div class="flip-card-back">
-                            <h3 class="card-back-title">Pemberkatan Nikah</h3>
-                            <p><i class="fas fa-calendar-alt"></i> Sabtu, 13 September 2025</p>
-                            <p><i class="fas fa-clock"></i> 08:00 - 10:00 WIB</p>
-                            <p class="address-text"><i class="fas fa-map-marker-alt"></i> Gereja Kalvari, Lubang Buaya,
-                                Jakarta Timur</p>
-                            <a href="https://maps.app.goo.gl/uxPTWD5KjbeWY1zi8?g_st=aw " target="_blank"
-                                class="map-button">
+                            <h3 class="card-back-title">Akad Nikah</h3>
+                            <p><i class="fas fa-calendar-alt"></i> Sabtu, 06 September 2025</p>
+                            <p><i class="fas fa-clock"></i> 08:00 - Selesai</p>
+                            <p class="address-text"><i class="fas fa-map-marker-alt"></i> Jl. Sunan Gunungjati Blok Jati
+                                Lor Rt. 002 / Rw. 001 Desa Kalisapu Kec. Gunungjati Kab. Cirebon</p>
+                            <a href="https://maps.app.goo.gl/GkNTJkobdW8NEAXg8" target="_blank" class="map-button">
                                 <i class="fas fa-map-location-dot"></i> Lihat Peta
                             </a>
                         </div>
@@ -859,12 +972,11 @@
                         </div>
                         <div class="flip-card-back">
                             <h3 class="card-back-title">Resepsi</h3>
-                            <p><i class="fas fa-calendar-alt"></i> Sabtu, 13 September 2025</p>
-                            <p><i class="fas fa-clock"></i> 12:00 - 14:00 WIB</p>
-                            <p class="address-text"><i class="fas fa-map-marker-alt"></i> Gedung Graha Sativa,
-                                Jatimelati, Bekasi</p>
-                            <a href="https://maps.app.goo.gl/uxPTWD5KjbeWY1zi8?g_st=aw " target="_blank"
-                                class="map-button">
+                            <p><i class="fas fa-calendar-alt"></i> Sabtu, 06 September 2025</p>
+                            <p><i class="fas fa-clock"></i> 10:00 - Selesai</p>
+                            <p class="address-text"><i class="fas fa-map-marker-alt"></i> Jl. Sunan Gunungjati Blok Jati
+                                Lor Rt. 002 / Rw. 001 Desa Kalisapu Kec. Gunungjati Kab. Cirebon</p>
+                            <a href="https://maps.app.goo.gl/GkNTJkobdW8NEAXg8" target="_blank" class="map-button">
                                 <i class="fas fa-map-location-dot"></i> Lihat Peta
                             </a>
                         </div>
@@ -884,24 +996,40 @@
             <div class="gift-cards-container">
 
                 <div class="bank-card">
-                    <img src="assets/img/logo-bca.png" alt="Logo BCA" class="bank-card-logo">
-                    <p class="bank-card-name">Fanny Setia Anjani</p>
-                    <div class="bank-card-number">5780 6651 67</div>
-                    <button class="copy-button" data-clipboard-text="5780665167">
+                    <img src="assets/img/logo-bjb.png" alt="Logo BJB" class="bank-card-logo">
+                    <p class="bank-card-name">Gilang Rizky Ramadhan</p>
+                    <div class="bank-card-number">0143660079101</div>
+                    <button class="copy-button" data-clipboard-text="0143660079101">
                         <i class="fa-regular fa-copy"></i> Salin Nomor
                     </button>
                 </div>
 
                 <div class="bank-card">
-                    <img src="assets/img/logo-panin.png" alt="Logo Panin" class="bank-card-logo">
-                    <p class="bank-card-name">Andreas Deny Tukan</p>
-                    <div class="bank-card-number">1001 1337 07</div>
-                    <button class="copy-button" data-clipboard-text="1001133707">
+                    <img src="assets/img/logo-cimb.png" alt="Logo CIMB" class="bank-card-logo">
+                    <p class="bank-card-name">Andini Ruslana</p>
+                    <div class="bank-card-number">706360679200 </div>
+                    <button class="copy-button" data-clipboard-text="706360679200">
                         <i class="fa-regular fa-copy"></i> Salin Nomor
                     </button>
                 </div>
 
             </div>
+        </section>
+
+        <section class="section guestbook-section">
+            <h2 class="section-title">Buku Tamu & Ucapan</h2>
+            <p>Kirimkan doa dan ucapan terbaik Anda untuk kami di hari yang berbahagia ini.</p>
+
+            <form id="guestbook-form">
+                <input type="text" id="name" placeholder="Nama Anda" required>
+                <textarea id="message" rows="4" placeholder="Tulis ucapan Anda di sini..." required></textarea>
+                <button type="submit" id="submit-button">
+                    <i class="fa-regular fa-paper-plane"></i> Kirim Ucapan
+                </button>
+            </form>
+
+            <div id="ucapan-list">
+                </div>
         </section>
 
         <footer>
@@ -956,7 +1084,7 @@
             }
 
             function initCountdown() {
-                const countdownDate = new Date("Sep 13, 2025 08:00:00").getTime();
+                const countdownDate = new Date("Sep 06, 2025 08:00:00").getTime();
                 const countdownElements = {
                     days: document.getElementById("days"),
                     hours: document.getElementById("hours"),
@@ -986,7 +1114,7 @@
                 }, 1000);
             }
 
-             function initStickyGallery() {
+            function initStickyGallery() {
                 const panels = document.querySelectorAll('.sticky-panel');
                 if (panels.length === 0) return;
 
@@ -1046,6 +1174,91 @@
                 });
             }
 
+            // --- [BARU] FUNGSI UNTUK SUPABASE ---
+            function initGuestbook() {
+                const SUPABASE_URL = 'https://opervlfswrybshzxqjvj.supabase.co'; // <-- GANTI DENGAN URL ANDA
+                const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wZXJ2bGZzd3J5YnNoenhxanZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY0ODE2NTYsImV4cCI6MjA3MjA1NzY1Nn0.u4Gwaroggk9jh09Ope2XVE6e3wLZKitgoM25elS8BNU';
+
+                const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+                const form = document.getElementById('guestbook-form');
+                const submitButton = document.getElementById('submit-button');
+                const ucapanList = document.getElementById('ucapan-list');
+                const submitIcon = submitButton.querySelector('i');
+                const originalButtonHTML = submitButton.innerHTML;
+
+                const tampilkanUcapan = (ucapan, prepend = false) => {
+                    const item = document.createElement('div');
+                    item.className = 'ucapan-item';
+                    
+                    const tanggal = new Date(ucapan.created_at).toLocaleString('id-ID', {
+                        day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                    });
+
+                    item.innerHTML = `
+                        <p class="ucapan-nama">${ucapan.name}</p>
+                        <p class="ucapan-pesan">${ucapan.message}</p>
+                        <span class="ucapan-tanggal">${tanggal}</span>
+                    `;
+
+                    if (prepend) {
+                        ucapanList.prepend(item);
+                    } else {
+                        ucapanList.appendChild(item);
+                    }
+                };
+
+                const muatUcapanAwal = async () => {
+                    const { data, error } = await supabaseClient
+                        .from('ucapan') // Pastikan nama tabel 'ucapan'
+                        .select('*')
+                        .order('created_at', { ascending: false });
+
+                    if (error) {
+                        console.error('Error mengambil data:', error);
+                    } else {
+                        ucapanList.innerHTML = '';
+                        data.forEach(ucapan => tampilkanUcapan(ucapan, false));
+                    }
+                };
+
+                form.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = 'Mengirim...';
+
+                    const name = document.getElementById('name').value;
+                    const message = document.getElementById('message').value;
+
+                    const { error } = await supabaseClient
+                        .from('ucapan')
+                        .insert([{ name: name, message: message }]);
+
+                    if (error) {
+                        console.error('Error mengirim ucapan:', error);
+                        alert('Gagal mengirim ucapan. Silakan coba lagi.');
+                    } else {
+                        form.reset();
+                    }
+                    
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonHTML;
+                });
+
+                supabaseClient.channel('public:ucapan')
+                    .on(
+                        'postgres_changes',
+                        { event: 'INSERT', schema: 'public', table: 'ucapan' },
+                        (payload) => {
+                            tampilkanUcapan(payload.new, true);
+                        }
+                    )
+                    .subscribe();
+
+                muatUcapanAwal();
+            }
+
             // --- Menjalankan Semua Fungsi ---
             openButton.addEventListener('click', openInvitation);
             musicControl.addEventListener('click', toggleMusic);
@@ -1055,6 +1268,7 @@
             initCountdown();
             initScrollAnimations();
             initCopyButtons();
+            initGuestbook();
         });
     </script>
 </body>
