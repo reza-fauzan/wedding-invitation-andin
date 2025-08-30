@@ -39,6 +39,11 @@
             --dark-text: #3D2B1F;
             --soft-dark-text: #6d4c41;
 
+            --secondary-brown: #5D4037; 
+            --creme-bg: #F5F5DC;    
+            --dark-text: #333;
+            --white-text: #fff;
+
             /* Font */
             --font-heading: 'Great Vibes', cursive;
             --font-body: 'Montserrat', sans-serif;
@@ -212,18 +217,34 @@
         /* Ayat Suci & Countdown */
         #countdown {
             display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
+            justify-content: center;
+            gap: 20px; 
+            flex-wrap: wrap; 
+            margin-top: 30px;
+            position: relative; 
+            z-index: 1;
         }
 
         /* Latar belakang lembut untuk section */
-        .countdown-section {
-            background-color: var(--light-bg);
-            position: relative;
-            /* Wajib untuk hiasan bunga */
-            padding-top: 80px;
-            padding-bottom: 80px;
-        }
+.countdown-section {
+    background-color: var(--creme-bg); /* Latar belakang krem */
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* Penting untuk ornamen yang keluar batas */
+}
+
+.countdown-section::before,
+.countdown-section::after {
+    content: '';
+    position: absolute;
+    width: 250px; /* Sesuaikan ukuran ornamen */
+    height: 250px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.2; /* Buat agak transparan */
+    z-index: 0;
+}
 
         /* Hiasan Bunga di Pojok Section */
         .decorated-section::before,
@@ -287,13 +308,10 @@
         #countdown {
             display: flex;
             flex-wrap: wrap;
-            /* Agar responsif di layar sangat kecil */
             justify-content: center;
             gap: 15px;
-            /* Jarak antar lingkaran */
             position: relative;
             z-index: 2;
-            /* Memastikan di atas hiasan bunga */
         }
 
         .countdown-item {
@@ -301,7 +319,7 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #FAD9E0 0%, #E7A3B0 100%);
+            background: linear-gradient(135deg, #E0DCD1 0%, #A67B5B 100%);
 
             /* Efek Terangkat */
             border: 2px solid white;
@@ -336,18 +354,18 @@
         /* The Couple (Monogram) */
         .couple-section-monogram {
             background-image: linear-gradient(rgba(93, 64, 55, 0.7), rgba(93, 64, 55, 0.7)), url('assets/img/bg-GA.jpg');
-            background-size: cover;       
-            background-position: center;  
+            background-size: cover;
+            background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed; 
+            background-attachment: fixed;
             color: var(--white-text);
         }
 
 
-.couple-section-monogram .monogram-initials,
-.couple-section-monogram .monogram-ampersand {
-    color: var(--white-text);
-}
+        .couple-section-monogram .monogram-initials,
+        .couple-section-monogram .monogram-ampersand {
+            color: var(--white-text);
+        }
 
         .monogram-circle {
             width: 150px;
@@ -381,7 +399,7 @@
             font-weight: 700;
             font-size: 1.2rem;
             color: var(--white-text);
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
             margin-bottom: 5px;
         }
 
@@ -784,13 +802,58 @@
             /* Jarak untuk scrollbar */
         }
 
+        .kehadiran-group {
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .kehadiran-group label {
+            font-weight: 600;
+            color: var(--soft-dark-text);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .radio-options {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .radio-options input[type="radio"] {
+            display: none;
+            /* Sembunyikan radio button asli */
+        }
+
+        .radio-options label {
+            font-weight: 500;
+            padding: 8px 15px;
+            border: 1px solid #F5E3E6;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Tampilan saat radio button dipilih */
+        .radio-options input[type="radio"]:checked+label {
+            background-color: var(--primary-brown);
+            color: var(--white-text);
+            border-color: var(--primary-brown);
+        }
+
+
         .ucapan-item {
             background-color: #FFFFFF;
             border-left: 5px solid var(--primary-brown);
             padding: 15px 20px;
             border-radius: 0 8px 8px 0;
+            font-size: 0.8rem;
+            font-weight: 600;
             margin-bottom: 15px;
             box-shadow: 0 4px 15px rgba(199, 130, 131, 0.08);
+            color: white;
+            margin-left: 10px;
         }
 
         .ucapan-item p {
@@ -817,6 +880,31 @@
             display: block;
             text-align: right;
         }
+
+        .ucapan-status {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 5px;
+            color: white;
+            margin-left: 10px;
+        }
+
+        .ucapan-status.hadir {
+            background-color: #4CAF50;
+        }
+
+        /* Hijau */
+        .ucapan-status.tidak-hadir {
+            background-color: #F44336;
+        }
+
+        /* Merah */
+        .ucapan-status.ragu-ragu {
+            background-color: #FFC107;
+        }
+
+        /* Kuning */
 
         .toast {
             visibility: hidden;
@@ -1090,7 +1178,19 @@
 
             <form id="guestbook-form">
                 <input type="text" id="name" placeholder="Nama Anda" required>
+
                 <textarea id="message" rows="4" placeholder="Tulis ucapan Anda di sini..." required></textarea>
+
+                                <div class="kehadiran-group">
+                    <label>Konfirmasi Kehadiran:</label>
+                    <div class="radio-options">
+                        <input type="radio" id="hadir" name="status_kehadiran" value="Hadir" required>
+                        <label for="hadir">Hadir</label>
+
+                        <input type="radio" id="tidak-hadir" name="status_kehadiran" value="Tidak Hadir">
+                        <label for="tidak-hadir">Tidak Hadir</label>
+                    </div>
+                </div>
                 <button type="submit" id="submit-button">
                     <i class="fa-regular fa-paper-plane"></i> Kirim Ucapan
                 </button>
@@ -1273,8 +1373,17 @@
                         day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
                     });
 
+                    let statusHTML = '';
+                    if (ucapan.status_kehadiran) {
+                        let statusClass = '';
+                        if (ucapan.status_kehadiran === 'Hadir') statusClass = 'hadir';
+                        if (ucapan.status_kehadiran === 'Tidak Hadir') statusClass = 'tidak-hadir';
+
+                        statusHTML = `<span class="ucapan-status ${statusClass}">${ucapan.status_kehadiran}</span>`;
+                    }
+
                     item.innerHTML = `
-                        <p class="ucapan-nama">${ucapan.name}</p>
+                        <p class="ucapan-nama">${ucapan.name} ${statusHTML}</p>
                         <p class="ucapan-pesan">${ucapan.message}</p>
                         <span class="ucapan-tanggal">${tanggal}</span>
                     `;
@@ -1313,30 +1422,28 @@
                 form.addEventListener('submit', async (event) => {
                     event.preventDefault();
 
+                    const originalButtonHTML = submitButton.innerHTML;
                     submitButton.disabled = true;
-                    submitButton.innerHTML = 'Mengirim...';
+                    submitButton.innerHTML = `<span class="spinner"></span> Mengirim...`;
 
                     const name = document.getElementById('name').value;
                     const message = document.getElementById('message').value;
+                    const status_kehadiran = document.querySelector('input[name="status_kehadiran"]:checked').value;
 
+                    // INI BAGIAN YANG DIPERBAIKI
                     const { error } = await supabaseClient
-                        .from('ucapan')
-                        .insert([{ name: name, message: message }]);
+                        .from('ucapan') // Pastikan baris ini ada
+                        .insert([{ name: name, message: message, status_kehadiran: status_kehadiran }]);
 
                     if (error) {
                         console.error('Error mengirim ucapan:', error);
                         alert('Gagal mengirim ucapan. Silakan coba lagi.');
-                        // Kembalikan tombol seperti semula HANYA jika gagal
+                        // Kembalikan tombol HANYA jika gagal
                         submitButton.disabled = false;
                         submitButton.innerHTML = originalButtonHTML;
                     } else {
-                        // 1. Panggil fungsi notifikasi baru
                         showToast();
-
-                        // 2. Atur penanda di browser bahwa RSVP sudah dikirim
                         sessionStorage.setItem('skipCover', 'true');
-
-                        // 3. Tunggu 2 detik agar pengguna sempat melihat notifikasi, lalu refresh
                         setTimeout(() => {
                             location.reload();
                         }, 2000);
