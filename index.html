@@ -21,7 +21,9 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
@@ -29,12 +31,12 @@
     <style>
         /* --- 1. PALET WARNA UTAMA & PENGATURAN DASAR --- */
         :root {
-            --primary-brown: #8D6E63;     
-            --dark-brown: #5D4037;        
-            --accent-gold: #C5A66A;        
-            --light-bg: #FDF5E6;           
+            --primary-brown: #8D6E63;
+            --dark-brown: #5D4037;
+            --accent-gold: #C5A66A;
+            --light-bg: #FDF5E6;
             --white-text: #FFFFFF;
-            --dark-text: #3D2B1F;          
+            --dark-text: #3D2B1F;
             --soft-dark-text: #6d4c41;
 
             /* Font */
@@ -743,11 +745,14 @@
         #ucapan-list {
             margin-top: 40px;
             text-align: left;
-            max-height: 400px; /* Batas tinggi agar tidak terlalu panjang */
-            overflow-y: auto; /* Aktifkan scroll jika kontennya panjang */
-            padding-right: 10px; /* Jarak untuk scrollbar */
+            max-height: 400px;
+            /* Batas tinggi agar tidak terlalu panjang */
+            overflow-y: auto;
+            /* Aktifkan scroll jika kontennya panjang */
+            padding-right: 10px;
+            /* Jarak untuk scrollbar */
         }
-        
+
         .ucapan-item {
             background-color: #FFFFFF;
             border-left: 5px solid var(--primary-brown);
@@ -773,13 +778,41 @@
             color: var(--soft-dark-text);
             font-size: 1rem;
         }
-        
+
         .ucapan-item .ucapan-tanggal {
             font-size: 0.8rem;
             color: #aaa;
             margin-top: 10px;
             display: block;
             text-align: right;
+        }
+
+        .toast {
+            visibility: hidden;
+            /* Sembunyi secara default */
+            min-width: 280px;
+            background-color: #4CAF50;
+            /* Warna hijau tanda berhasil */
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            padding: 16px;
+            position: fixed;
+            /* Tetap di layar saat di-scroll */
+            z-index: 1000;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 30px;
+            opacity: 0;
+            transition: opacity 0.5s, visibility 0.5s, bottom 0.5s;
+        }
+
+        /* Kelas untuk memunculkan notifikasi */
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+            /* Muncul dari bawah */
         }
 
 
@@ -835,6 +868,7 @@
             <h1>Gilang & Andin</h1>
             <h3>Sabtu, 06 September 2025</h3>
             <h4>Turut Mengundang</h4>
+            <p class="guest-name" id="guest-name">...</p> 
             <br>
             <button id="open-invitation" class="open-button">
                 <i class="fa-regular fa-heart"></i> Buka Undangan
@@ -1029,13 +1063,13 @@
             </form>
 
             <div id="ucapan-list">
-                </div>
+            </div>
         </section>
 
         <footer>
             <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir untuk memberikan doa
                 restu.</p>
-            <h2 class="section-title">Deny & Fanny</h2>
+            <h2 class="section-title">Gilang & Andin</h2>
             <p>&copy; 2025. All Rights Reserved.</p>
         </footer>
     </div>
@@ -1050,6 +1084,16 @@
             const musicControl = document.getElementById('music-control');
             const musicIcon = document.getElementById('music-icon');
             const sections = document.querySelectorAll('.section');
+
+            const guestNameElement = document.getElementById('guest-name');
+            const urlParams = new URLSearchParams(window.location.search);
+            const namaTamu = urlParams.get('to');
+
+            if (namaTamu) {
+                guestNameElement.textContent = namaTamu.replace(/\+/g, ' ');
+            } else {
+                guestNameElement.textContent = 'Bapak/Ibu/Saudara/i';
+            }
 
             // --- Fungsi-fungsi Utama ---
             function openInvitation() {
@@ -1190,7 +1234,7 @@
                 const tampilkanUcapan = (ucapan, prepend = false) => {
                     const item = document.createElement('div');
                     item.className = 'ucapan-item';
-                    
+
                     const tanggal = new Date(ucapan.created_at).toLocaleString('id-ID', {
                         day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
                     });
@@ -1207,6 +1251,16 @@
                         ucapanList.appendChild(item);
                     }
                 };
+
+                // Fungsi untuk menampilkan notifikasi toast
+                function showToast() {
+                    const toast = document.getElementById('toast-notification');
+                    toast.classList.add('show');
+                    // Sembunyikan notifikasi setelah 3 detik
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+                }
 
                 const muatUcapanAwal = async () => {
                     const { data, error } = await supabaseClient
@@ -1238,25 +1292,38 @@
                     if (error) {
                         console.error('Error mengirim ucapan:', error);
                         alert('Gagal mengirim ucapan. Silakan coba lagi.');
+                        // Kembalikan tombol seperti semula HANYA jika gagal
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalButtonHTML;
                     } else {
-                        form.reset();
+                        // 1. Panggil fungsi notifikasi baru
+                        showToast();
+
+                        // 2. Atur penanda di browser bahwa RSVP sudah dikirim
+                        sessionStorage.setItem('skipCover', 'true');
+
+                        // 3. Tunggu 2 detik agar pengguna sempat melihat notifikasi, lalu refresh
+                        setTimeout(() => {
+                            location.reload();
+                        }, 2000);
                     }
-                    
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = originalButtonHTML;
                 });
 
-                supabaseClient.channel('public:ucapan')
-                    .on(
-                        'postgres_changes',
-                        { event: 'INSERT', schema: 'public', table: 'ucapan' },
-                        (payload) => {
-                            tampilkanUcapan(payload.new, true);
-                        }
-                    )
-                    .subscribe();
-
                 muatUcapanAwal();
+            }
+
+            if (sessionStorage.getItem('skipCover') === 'true') {
+                openInvitation(); // Langsung panggil fungsi untuk membuka undangan
+                sessionStorage.removeItem('skipCover'); // Hapus penanda agar refresh manual berikutnya normal
+
+                // Bonus: Scroll langsung ke bagian buku tamu
+                const guestbookSection = document.getElementById('guestbook-section');
+                if (guestbookSection) {
+                    // Beri sedikit jeda agar transisi lebih mulus
+                    setTimeout(() => {
+                        guestbookSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                }
             }
 
             // --- Menjalankan Semua Fungsi ---
@@ -1271,6 +1338,7 @@
             initGuestbook();
         });
     </script>
+    <div id="toast-notification" class="toast">Ucapan Anda berhasil terkirim!</div>
 </body>
 
 </html>
